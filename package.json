@@ -1,0 +1,31 @@
+{
+  "name": "logger-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "",
+    "test": "jest --coverage --watch",
+    "lint": "eslint --fix . --ext .ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ioredis": "^4.27.2",
+    "dotenv": "^10.0.0",
+    "ioredis": "^4.27.9",
+    "kafkajs": "^1.15.0",
+    "typescript": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-unicorn": "^35.0.0",
+    "jest": "^27.1.1",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1"
+  }
+}
