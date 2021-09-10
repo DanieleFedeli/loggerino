@@ -1,5 +1,5 @@
 import { FileService } from "./file-service";
-import { FileSystemStrategy } from "./file-system.strategy";
+import { FileSystemStrategy } from "../strategy/file-system/file-system.strategy";
 
 describe("File service", () => {
 	let fileService: FileService;
@@ -17,7 +17,7 @@ describe("File service", () => {
 		expect(newStrategies).toContain(strategy);
 	});
 
-	test("Write on command", async () => {
+	test("Write command", async () => {
 		const strategy = new FileSystemStrategy("file-system");
 		jest.spyOn(strategy, "write").mockImplementation(() => Promise.resolve());
 
@@ -26,5 +26,17 @@ describe("File service", () => {
 		expect(allSettledResult).toMatchObject([
 			{ status: "fulfilled", value: undefined },
 		]);
+	});
+
+	test("Delete command", () => {
+		expect(fileService.getStrategies()).toHaveLength(0);
+
+		const strategy = new FileSystemStrategy("file-system");
+		fileService.add(strategy);
+
+		expect(fileService.getStrategies()).toHaveLength(1);
+
+		fileService.delete("file-system");
+		expect(fileService.getStrategies()).toHaveLength(0);
 	});
 });

@@ -1,4 +1,7 @@
-import { FileStrategy, WriteResultType } from "./file-strategy.interface";
+import {
+	FileStrategy,
+	WriteResultType,
+} from "../strategy/file-strategy.interface";
 
 export class FileService {
 	private strategies;

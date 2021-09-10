@@ -1,4 +1,4 @@
-import { EventEmitter } from "node:events";
+import { EventEmitter } from "events";
 import { Redis } from "ioredis";
 import { MessageBrokerAdapter } from "./adapter.interface";
 import { Events } from "./events.interface";
