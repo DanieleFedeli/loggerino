@@ -29,7 +29,7 @@ export class IORedisAdapter
 		return this;
 	}
 
-	on<E extends "log">(event: E, listener: Events[E]): this {
+	on<E extends "message">(event: E, listener: Events[E]): this {
 		this.redis.on(event, listener);
 		return this;
 	}

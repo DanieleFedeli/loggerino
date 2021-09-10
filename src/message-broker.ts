@@ -1,3 +1,4 @@
+import { MessageContentParsed } from "adapter/events.interface";
 import { FileService } from "file/file-service";
 import { MessageBrokerAdapter } from "./adapter/adapter.interface";
 
@@ -13,9 +14,10 @@ export class MessageBroker {
 	}
 
 	start(): void {
-		this.broker.on("log", ({ data, filename }) =>
-			this.fileService.write(data, filename)
-		);
+		this.broker.on("message", (channel, message) => {
+			const { data, filename } = JSON.parse(message) as MessageContentParsed;
+			this.fileService.write(data, filename);
+		});
 	}
 
 	cleanup(): void {
@@ -26,12 +28,21 @@ export class MessageBroker {
 			});
 			this.channelMap.delete(channel);
 		}
+		this.fileService.cleanup();
 	}
 
 	subscribe(channelId: string): void {
-		this.broker.subscribe(channelId, error => {
+		this.broker.subscribe(channelId, (error, count) => {
 			if (error) console.error(error.message);
-			else this.channelMap.add(channelId);
+			else {
+				console.log(
+					"Subscribed to channel:",
+					channelId,
+					"\tnumber of members:",
+					count
+				);
+				this.channelMap.add(channelId);
+			}
 		});
 	}
 }

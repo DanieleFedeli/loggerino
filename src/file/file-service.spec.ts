@@ -39,4 +39,11 @@ describe("File service", () => {
 		fileService.delete("file-system");
 		expect(fileService.getStrategies()).toHaveLength(0);
 	});
+
+	test("cleanup command", () => {
+		const strategy = new FileSystemStrategy("file-system");
+
+		fileService.add(strategy);
+		expect(() => fileService.cleanup()).not.toThrow();
+	});
 });

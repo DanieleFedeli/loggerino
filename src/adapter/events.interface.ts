@@ -1,3 +1,8 @@
 export interface Events {
-	log: (content: { data: string; filename: string }) => void;
+	message: (
+		channel: string,
+		content: string //Object to parse
+	) => void;
 }
+
+export type MessageContentParsed = { data: string; filename: string };

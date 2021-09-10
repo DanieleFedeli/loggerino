@@ -9,9 +9,9 @@ describe("File system strategy", () => {
 		await fs.unlink(filename);
 	});
 
-	it("Write command", async () => {
-		expect(
+	it("Write command", () => {
+		expect(() =>
 			fileStrategy.write({ fakeObject: "data" }, filename)
-		).resolves.not.toThrow();
+		).not.toThrow();
 	});
 });

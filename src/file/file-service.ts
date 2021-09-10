@@ -18,7 +18,7 @@ export class FileService {
 		data: unknown,
 		filename: string
 	): Promise<PromiseSettledResult<WriteResultType>[]> {
-		const resultPromises = [...this.strategies.values()].map(fileStrategy =>
+		const resultPromises = this.getStrategies().map(fileStrategy =>
 			fileStrategy.write(data, filename)
 		);
 
@@ -33,5 +33,13 @@ export class FileService {
 
 	getStrategies(): FileStrategy[] {
 		return [...this.strategies.values()];
+	}
+
+	cleanup(): void {
+		const strategies = this.getStrategies();
+
+		for (const strategy of strategies) {
+			strategy.cleanup();
+		}
 	}
 }
