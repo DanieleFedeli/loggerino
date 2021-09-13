@@ -22,7 +22,7 @@ console.info("[READY] Listening events");
 
 const publishFakeMessage = () => {
 	const fakeMessage = JSON.stringify({
-		data: `[12:234:TZ1234] GET HTTP2.0 402 ${Math.random() * 1000}`,
+		data: `[12:234:TZ1234] GET HTTP 2.0 402 ${Math.random() * 1000}`,
 		filename: "./log.txt",
 	});
 
