@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
 import { Redis } from "ioredis";
-import { MessageBrokerAdapter } from "./adapter.interface";
-import { Events } from "./events.interface";
+import { MessageBrokerAdapter } from "../adapter.interface";
+import { Events } from "../events.interface";
 
 export class IORedisAdapter
 	extends EventEmitter
