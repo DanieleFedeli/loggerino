@@ -11,7 +11,7 @@ export class KafkaAdapter extends EventEmitter implements MessageBrokerAdapter {
 	}
 
 	async subscribe(channelId: string): Promise<this> {
-		await this.kafka.subscribe({ topic: channelId });
+		await this.kafka.subscribe({ topic: channelId, fromBeginning: true });
 		return this;
 	}
 
@@ -21,7 +21,11 @@ export class KafkaAdapter extends EventEmitter implements MessageBrokerAdapter {
 	}
 
 	on<E extends "message">(event: E, listener: Events[E]): this {
-		this.kafka.on(""); // TODO
+		this.kafka.run({
+			eachBatchAutoResolve: true,
+			eachMessage: async ({ topic, message }) =>
+				listener(topic, message.value?.toString() ?? ""),
+		});
 		return this;
 	}
 }
